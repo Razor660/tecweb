@@ -1,9 +1,11 @@
 # tecweb
-### Matrícula:
+## Matrícula:
 202330204
-### Nombre:
+## Nombre:
 Mario Aldair Flores Hernández
-### Materia:
+## Materia:
 Tecnologías Web
-### Periodo:
+## Periodo:
 Otoño 2025
+### Descripción:
+Este repositorio fue creado con el propósito de mejorar mis habilidades y conocimientos previos en el mundo de la web.
