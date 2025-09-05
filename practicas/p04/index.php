@@ -27,5 +27,31 @@
             <li>\$house*5 inválida (* no permitido en nombre).</li>
         </ul>";
     ?>
+
+    <h2>Ejercicio 2</h2>
+    <?php
+        $a = "ManejadorSQL";
+        $b = "MySQL";
+        $c = &$a;
+
+        echo "<p><strong>Primer bloque:</strong></p>";
+        echo "\$a = $a<br>";
+        echo "\$b = $b<br>";
+        echo "\$c = $c<br>";
+
+        $a = "PHP server";
+        $b = &$a;
+
+        echo "<p><strong>Segundo bloque:</strong></p>";
+        echo "\$a = $a<br>";
+        echo "\$b = $b<br>";
+        echo "\$c = $c<br>";
+
+        echo "<p><em>Explicación:</em> Al usar referencias 
+        las variables apuntan al mismo valor en memoria. 
+        Cuando cambiamos \$a, automáticamente cambian \$b y \$c.</p>";
+    ?>
+
+
 </body>
 </html>
