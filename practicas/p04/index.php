@@ -11,11 +11,11 @@
         <?php
         $_myvar = "válida";
         $_7var = "válida";
-        // myvar; ❌ falta el $
+        // myvar; falta el $
         $myvar = "válida";
         $var7 = "válida";
         $_element1 = "válida";
-        // $house*5; ❌ caracteres inválidos
+        // $house*5; caracteres inválidos
 
         echo "<ul>
             <li>\$_myvar válida (inicia con guion bajo).</li>
