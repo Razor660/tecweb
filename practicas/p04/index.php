@@ -52,6 +52,21 @@
         Cuando cambiamos \$a, automáticamente cambian \$b y \$c.</p>";
     ?>
 
+    <h2>Ejercicio 3</h2>
+    <?php
+        $a = "PHP5";
+        $z[] = &$a;
+        $b = "5a version de PHP";
+        $c = $b * 10; // conversión implícita (string → número)
+        $a .= $b; // concatenación
+        $b *= $c; // conversión implícita (string → número)
+        $z[0] = "MySQL";
+
+        echo "<pre>";
+        var_dump($a, $b, $c, $z);
+        echo "</pre>";
+    ?>
+
 
 </body>
 </html>
