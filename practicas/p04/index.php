@@ -81,5 +81,17 @@
         var_dump($GLOBALS['a'], $GLOBALS['b'], $GLOBALS['c'], $GLOBALS['z']);
         echo "</pre>";
     ?>
+
+    <h2>Ejercicio 5</h2>
+    <?php
+        $a = "7 personas";
+        $b = (integer) $a; 
+        $a = "9E3";
+        $c = (double) $a;
+
+        echo "\$a = $a<br>";
+        echo "\$b = $b<br>";
+        echo "\$c = $c<br>";
+    ?>
 </body>
 </html>
