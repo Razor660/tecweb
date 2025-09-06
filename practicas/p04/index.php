@@ -93,5 +93,25 @@
         echo "\$b = $b<br>";
         echo "\$c = $c<br>";
     ?>
+
+    <h2>Ejercicio 6</h2>
+    <?php
+        $a = "0";
+        $b = "TRUE";
+        $c = FALSE;
+        $d = ($a OR $b);
+        $e = ($a AND $c);
+        $f = ($a XOR $b);
+
+        echo "<pre>";
+        var_dump($a, $b, $c, $d, $e, $f);
+        echo "</pre>";
+
+        echo "<p>Mostrar booleanos con <code>var_export</code>:</p>";
+        echo "c = " . var_export($c, true) . "<br>";
+        echo "e = " . var_export($e, true) . "<br>";
+    ?>
+
+
 </body>
 </html>
