@@ -112,6 +112,12 @@
         echo "e = " . var_export($e, true) . "<br>";
     ?>
 
-
+    <h2>Ejercicio 7</h2>
+    <?php
+        echo "Apache/PHP: " . $_SERVER['SERVER_SOFTWARE'] . "<br>";
+        echo "Sistema operativo servidor: " . PHP_OS . "<br>";
+        echo "Idioma navegador: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "<br>";
+    ?>
+    
 </body>
 </html>
