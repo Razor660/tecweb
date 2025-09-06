@@ -74,5 +74,12 @@
     <code>"MySQL"</code>.
 </p>
 
+        <h2>Ejercicio 4</h2>
+    <?php
+        echo "<pre>";
+        echo "Desde \$GLOBALS:\n";
+        var_dump($GLOBALS['a'], $GLOBALS['b'], $GLOBALS['c'], $GLOBALS['z']);
+        echo "</pre>";
+    ?>
 </body>
 </html>
