@@ -67,6 +67,12 @@
         echo "</pre>";
     ?>
 
+<p>
+    El <strong>warning</strong> aparece porque en <code>$c = $b*10;</code> se intenta
+    multiplicar un string no numérico. PHP convierte ese valor en <code>0</code> automáticamente.
+    Al final, debido a la referencia, todas las variables terminan con el valor
+    <code>"MySQL"</code>.
+</p>
 
 </body>
 </html>
