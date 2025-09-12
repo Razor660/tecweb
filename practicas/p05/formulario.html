@@ -44,6 +44,29 @@
           </li>
         </ul>
       </fieldset>
+<!-- Color: botones de radio (solo uno) -->
+        <fieldset>
+          <legend>Color (escoge uno)</legend>
+          <ul>
+            <li><label><input type="radio" name="color" value="rojo" checked> Rojo</label></li>
+            <li><label><input type="radio" name="color" value="azul"> Azul</label></li>
+            <li><label><input type="radio" name="color" value="negro"> Negro</label></li>
+            <li><label><input type="radio" name="color" value="plateado"> Plateado</label></li>
+          </ul>
+        </fieldset>
+
+        <!-- Características: checkboxes (puedes elegir varias) -->
+        <fieldset>
+          <legend>Características (escoge tantas como quieras)</legend>
+          <ul>
+            <li><label><input type="checkbox" name="features[]" value="cordones"> Cordones brillantes</label></li>
+            <li><label><input type="checkbox" name="features[]" value="logo" checked> Logo metálico</label></li>
+            <li><label><input type="checkbox" name="features[]" value="suela"> Suela luminosa</label></li>
+            <li><label><input type="checkbox" name="features[]" value="wifi"> WiFi integrado</label></li>
+          </ul>
+        </fieldset>
+
+
     </form>
 
   </body>
