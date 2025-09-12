@@ -4,9 +4,10 @@
     <meta charset="utf-8" >
     <title>Registro al Concurso</title>
     <style type="text/css">
-        ol, ul { 
-      list-style-type: none;
-        }
+      ol, ul { list-style-type: none; }
+      body { font-family: Arial, Helvetica, sans-serif; }
+      fieldset { margin-bottom: 1rem; padding: 1rem; }
+      label { display: inline-block; margin-right: .5rem; }
     </style>
   </head>
 
@@ -14,39 +15,36 @@
 
     <h1>Registro al Concurso &ldquo;Chidos mis Tenis&rdquo;</h1>
 
-    <p>¿Quieres cambiar tus viejos tenis por un par personalizado de Tenis Mike&#174;?<br><br>Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno de los diez afortunados ganadores.</p>
+    <p>¿Quieres cambiar tus viejos tenis por un par personalizado de Tenis Mike&#174;?<br><br>
+      Justifica el por qué tus tenis se <em>tienen que</em> ir y tú puedes ser uno de los diez afortunados ganadores.</p>
 
-    <p>Información del Participante</p>
+    <!-- FORM: action apunta a concurso.php (archivo que crearás) -->
+    <form action="concurso.php" method="post">
 
-    <ul>
-    <li>Nombre:</li>
-    <li>Dirección de E-mail:</li>
-    <li>Número Telefónico:</li>
-    <li>Mis tenis son tan feos porque...</li>
-    </ul>
-
-    <h2>Diseña tus Mike personalizados:</h2>
-
-    <p>Diseño personalizado del Tenis</p>
-
-    <p>Color <em>(escoge uno)</em>:</p>
-      <ul>
-      <li>Rojo</li>
-      <li>Azul</li>
-      <li>Negro</li>
-      <li>Plateado</li>
-      </ul>
-
-    <p>Características <em>(escoge tantas como quieras)</em>:</p>
-      <ul>
-      <li>Cordones brillantes</li>
-      <li>Logo metálico</li>
-      <li>Suela luminosa</li>
-      <li>WiFi integrado</li>
-      </ul>
-
-    <p>Talla</p>
-    <p>Las medidas reflejan el estándar masculino:</p>
+      <!-- Información Personal (fieldset) -->
+      <fieldset>
+        <legend>Información Personal</legend>
+        <ul>
+          <li>
+            Nombre:
+            <input type="text" name="name" required>
+          </li>
+          <li>
+            Dirección de E-mail:
+            <input type="email" name="email" required>
+          </li>
+          <li>
+            Número Telefónico:
+            <input type="tel" name="phone" pattern="[0-9+\-\s()]{6,}" placeholder="5551234567">
+          </li>
+          <li>
+            Mis tenis son tan feos porque...<br>
+            <textarea name="story" rows="4" cols="60" maxlength="300"
+              placeholder="No más de 300 caracteres de longitud"></textarea>
+          </li>
+        </ul>
+      </fieldset>
+    </form>
 
   </body>
-</html>
+</html>x  
