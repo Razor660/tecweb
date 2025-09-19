@@ -40,3 +40,19 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
       }
     ?>
   </fieldset>
+
+    <!-- EJERCICIO 2 -->
+  <fieldset><legend>Ejercicio 2 — generar ternas hasta impar,par,impar</legend>
+    <?php
+      $res2 = generar_hasta_impar_par_impar(0, 1000);
+      echo '<p>Iteraciones: <strong>'.$res2['iteraciones'].'</strong>, números generados: <strong>'.$res2['numeros_generados'].'</strong></p>';
+      echo '<table><thead><tr><th>#</th><th>n1</th><th>n2</th><th>n3</th></tr></thead><tbody>';
+      $idx = 1;
+      foreach ($res2['matriz'] as $fila) {
+        echo '<tr><td>'.($idx++).'</td><td>'.h($fila[0]).'</td><td>'.h($fila[1]).'</td><td>'.h($fila[2]).'</td></tr>';
+      }
+      echo '</tbody></table>';
+    ?>
+  </fieldset>
+
+  
