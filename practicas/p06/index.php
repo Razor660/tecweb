@@ -93,3 +93,32 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
       echo '</tbody></table>';
     ?>
   </fieldset>
+
+    <!-- EJERCICIO 5 -->
+  <fieldset><legend>Ejercicio 5 — formulario edad y sexo (POST)</legend>
+    <form action="#ej5" method="post">
+      <p>
+        Edad: <input type="number" name="edad" min="0" required />
+        Sexo:
+        <select name="sexo">
+          <option value="f">Femenino</option>
+          <option value="m">Masculino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <input type="submit" value="Enviar" />
+      </p>
+    </form>
+    <a id="ej5"></a>
+    <?php
+      if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edad']) && isset($_POST['sexo'])) {
+        $edad = $_POST['edad'];
+        $sexo = $_POST['sexo'];
+        if (es_mujer_en_rango($edad, $sexo)) {
+          echo '<p><strong>Bienvenida, usted está en el rango de edad permitido.</strong></p>';
+        } else {
+          echo '<p><strong>No cumple los requisitos:</strong> ';
+          echo 'Edad debe ser entre 18 y 35 y sexo Femenino. Usted envió edad='.h($edad).' y sexo='.h($sexo).'.</p>';
+        }
+      }
+    ?>
+  </fieldset>

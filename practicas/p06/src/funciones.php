@@ -79,3 +79,16 @@ function crear_arreglo_ascii() {
     }
     return $arr;
 }
+
+/**
+ * Ejercicio 5
+ * Valida edad y sexo: retorna true si sexo femenino y edad en [18,35]
+ * (Se asume sexo 'f' o 'femenino' en minusculas; normalize antes de pasar)
+ */
+function es_mujer_en_rango($edad, $sexo) {
+    $edad = intval($edad);
+    $sexo = strtolower(trim($sexo));
+    $esFemenino = ($sexo === 'f' || $sexo === 'femenino' || $sexo === 'female' || $sexo === 'mujer');
+    return $esFemenino && ($edad >= 18 && $edad <= 35);
+}
+
