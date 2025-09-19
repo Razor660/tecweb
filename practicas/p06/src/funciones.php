@@ -33,3 +33,38 @@ function generar_hasta_impar_par_impar($min = 0, $max = 1000) {
     $iter = count($filas);
     return ['matriz' => $filas, 'iteraciones' => $iter, 'numeros_generados' => $iter * 3];
 }
+
+/**
+ * Ejercicio 3 - Variante while
+ * Encuentra el primer numero aleatorio (entre min y max) que sea múltiplo de $divisor.
+ * Devuelve ['numero'=>..., 'iteraciones'=>...] (iteraciones = intentos)
+ */
+function primer_multiplo_while($divisor, $min = 1, $max = 10000, $maxAttempts = 1000000) {
+    $divisor = max(1, intval($divisor));
+    $count = 0;
+    while ($count < $maxAttempts) {
+        $count++;
+        $n = rand($min, $max);
+        if ($n % $divisor === 0) {
+            return ['numero' => $n, 'iteraciones' => $count];
+        }
+    }
+    return ['numero' => null, 'iteraciones' => $count];
+}
+
+/**
+ * Ejercicio 3 - Variante do-while
+ */
+function primer_multiplo_do_while($divisor, $min = 1, $max = 10000, $maxAttempts = 1000000) {
+    $divisor = max(1, intval($divisor));
+    $count = 0;
+    do {
+        $count++;
+        $n = rand($min, $max);
+        if ($n % $divisor === 0) {
+            return ['numero' => $n, 'iteraciones' => $count];
+        }
+    } while ($count < $maxAttempts);
+    return ['numero' => null, 'iteraciones' => $count];
+}
+

@@ -55,4 +55,29 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
     ?>
   </fieldset>
 
-  
+    <!-- EJERCICIO 3 -->
+  <fieldset><legend>Ejercicio 3 — primer múltiplo de n (GET) — while y do-while</legend>
+    <p>Prueba <code>?divisor=37</code> en la URL.</p>
+    <?php
+      if (isset($_GET['divisor'])) {
+        $d = intval($_GET['divisor']);
+        echo '<h4>Variante while</h4>';
+        $rW = primer_multiplo_while($d);
+        if ($rW['numero'] !== null) {
+          echo '<p>Encontrado: <strong>'.h($rW['numero']).'</strong> en '.$rW['iteraciones'].' iteraciones</p>';
+        } else {
+          echo '<p>No se encontró dentro del límite.</p>';
+        }
+
+        echo '<h4>Variante do-while</h4>';
+        $rD = primer_multiplo_do_while($d);
+        if ($rD['numero'] !== null) {
+          echo '<p>Encontrado: <strong>'.h($rD['numero']).'</strong> en '.$rD['iteraciones'].' iteraciones</p>';
+        } else {
+          echo '<p>No se encontró dentro del límite.</p>';
+        }
+      } else {
+        echo '<p>No se recibió parámetro <code>divisor</code>. Ejemplo: <a href="?divisor=37">?divisor=37</a></p>';
+      }
+    ?>
+  </fieldset>
