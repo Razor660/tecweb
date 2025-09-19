@@ -41,7 +41,7 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
     ?>
   </fieldset>
 
-    <!-- EJERCICIO 2 -->
+  <!-- EJERCICIO 2 -->
   <fieldset><legend>Ejercicio 2 — generar ternas hasta impar,par,impar</legend>
     <?php
       $res2 = generar_hasta_impar_par_impar(0, 1000);
@@ -55,7 +55,7 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
     ?>
   </fieldset>
 
-    <!-- EJERCICIO 3 -->
+  <!-- EJERCICIO 3 -->
   <fieldset><legend>Ejercicio 3 — primer múltiplo de n (GET) — while y do-while</legend>
     <p>Prueba <code>?divisor=37</code> en la URL.</p>
     <?php
@@ -82,7 +82,7 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
     ?>
   </fieldset>
 
-    <!-- EJERCICIO 4 -->
+  <!-- EJERCICIO 4 -->
   <fieldset><legend>Ejercicio 4 — arreglo ASCII 97..122</legend>
     <?php
       $arr = crear_arreglo_ascii();
@@ -94,7 +94,7 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
     ?>
   </fieldset>
 
-    <!-- EJERCICIO 5 -->
+  <!-- EJERCICIO 5 -->
   <fieldset><legend>Ejercicio 5 — formulario edad y sexo (POST)</legend>
     <form action="#ej5" method="post">
       <p>
@@ -122,3 +122,41 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
       }
     ?>
   </fieldset>
+
+  <!-- EJERCICIO 6 -->
+  <fieldset><legend>Ejercicio 6 — registro vehicular (consulta)</legend>
+    <form action="#ej6" method="post">
+      <p>
+        Buscar por matrícula (LLLNNNN): <input type="text" name="matricula" placeholder="ABC1234" />
+        <input type="submit" name="buscar" value="Buscar" />
+        <input type="submit" name="todos" value="Mostrar todos" />
+      </p>
+    </form>
+    <a id="ej6"></a>
+    <?php
+      $registro = registro_parque_vehicular();
+      if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['todos'])) {
+          echo '<h4>Todos los autos (print_r)</h4><pre>';
+          print_r($registro);
+          echo '</pre>';
+        } elseif (!empty($_POST['matricula'])) {
+          $mat = strtoupper(trim($_POST['matricula']));
+          $res = buscar_por_matricula($registro, $mat);
+          if ($res === null) {
+            echo '<p>No se encontró la matrícula '.h($mat).'</p>';
+          } else {
+            echo '<h4>Registro '.h($mat).'</h4><pre>';
+            print_r($res);
+            echo '</pre>';
+          }
+        } else {
+          echo '<p>Ingresa una matrícula o pulsa "Mostrar todos".</p>';
+        }
+      }
+    ?>
+  </fieldset>
+
+  <p><em>Recuerda: todas las funciones están en <code>src/funciones.php</code>.</em></p>
+</body>
+</html>

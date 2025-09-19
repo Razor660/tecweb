@@ -5,7 +5,7 @@
 /**
  * Ejercicio 1
  * Comprueba si $n es múltiplo de 5 y de 7
- * Devuelve array asociativo con 'mul5' y 'mul7' (booleanos) y 'both' (ambos)
+ * Devuelve array asociativo con 'mul5' y 'mul7' (booleans) y 'both' (ambos)
  */
 function esMultiplo5y7($n) {
     $n = intval($n);
@@ -92,3 +92,80 @@ function es_mujer_en_rango($edad, $sexo) {
     return $esFemenino && ($edad >= 18 && $edad <= 35);
 }
 
+/**
+ * Ejercicio 6
+ * Devuelve un arreglo asociativo con 15 autos (matricula => datos)
+ * Matricula formato LLLNNNN (ejemplo: ABC1234)
+ */
+function registro_parque_vehicular() {
+    return [
+        'UBN6338' => [
+            'Auto' => ['marca'=>'HONDA','modelo'=>'2020','tipo'=>'camioneta'],
+            'Propietario'=>['nombre'=>'Alfonzo Esparza','ciudad'=>'Puebla, Pue.','direccion'=>'C.U., Jardines de San Manuel']
+        ],
+        'UBN6339' => [
+            'Auto' => ['marca'=>'MAZDA','modelo'=>'2019','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Ma. del Consuelo Molina','ciudad'=>'Puebla, Pue.','direccion'=>'97 oriente']
+        ],
+        'ABC1234' => [
+            'Auto'=>['marca'=>'NISSAN','modelo'=>'2018','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Juan Pérez','ciudad'=>'Ciudad','direccion'=>'Calle Falsa 123']
+        ],
+        'DEF5678' => [
+            'Auto'=>['marca'=>'TOYOTA','modelo'=>'2021','tipo'=>'hachback'],
+            'Propietario'=>['nombre'=>'María López','ciudad'=>'Ciudad','direccion'=>'Av. Siempre Viva 7']
+        ],
+        'GHI9012' => [
+            'Auto'=>['marca'=>'FORD','modelo'=>'2017','tipo'=>'camioneta'],
+            'Propietario'=>['nombre'=>'Carlos Ruiz','ciudad'=>'Ciudad','direccion'=>'Bosques 12']
+        ],
+        'JKL3456' => [
+            'Auto'=>['marca'=>'CHEVROLET','modelo'=>'2016','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Ana Torres','ciudad'=>'Ciudad','direccion'=>'Lago 45']
+        ],
+        'MNO7890' => [
+            'Auto'=>['marca'=>'KIA','modelo'=>'2015','tipo'=>'hachback'],
+            'Propietario'=>['nombre'=>'Diego Sánchez','ciudad'=>'Ciudad','direccion'=>'Río 22']
+        ],
+        'PQR2345' => [
+            'Auto'=>['marca'=>'HYUNDAI','modelo'=>'2014','tipo'=>'camioneta'],
+            'Propietario'=>['nombre'=>'Sofía Gómez','ciudad'=>'Ciudad','direccion'=>'Olmo 9']
+        ],
+        'STU6789' => [
+            'Auto'=>['marca'=>'VOLKSWAGEN','modelo'=>'2022','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Luis Martínez','ciudad'=>'Ciudad','direccion'=>'Cerro 3']
+        ],
+        'VWX0123' => [
+            'Auto'=>['marca'=>'BMW','modelo'=>'2020','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Patricia Díaz','ciudad'=>'Ciudad','direccion'=>'Simón 11']
+        ],
+        'YZA4567' => [
+            'Auto'=>['marca'=>'AUDI','modelo'=>'2019','tipo'=>'hachback'],
+            'Propietario'=>['nombre'=>'Ricardo Flores','ciudad'=>'Ciudad','direccion'=>'Oasis 7']
+        ],
+        'BCD8901' => [
+            'Auto'=>['marca'=>'SUBARU','modelo'=>'2018','tipo'=>'camioneta'],
+            'Propietario'=>['nombre'=>'Verónica Peña','ciudad'=>'Ciudad','direccion'=>'Mirador 4']
+        ],
+        'EFG2346' => [
+            'Auto'=>['marca'=>'SUZUKI','modelo'=>'2021','tipo'=>'hachback'],
+            'Propietario'=>['nombre'=>'Hugo Ramírez','ciudad'=>'Ciudad','direccion'=>'Encino 66']
+        ],
+        'HIJ6780' => [
+            'Auto'=>['marca'=>'RENAULT','modelo'=>'2017','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Laura Méndez','ciudad'=>'Ciudad','direccion'=>'Pino 2']
+        ],
+        'KLM3451' => [
+            'Auto'=>['marca'=>'PEUGEOT','modelo'=>'2016','tipo'=>'sedan'],
+            'Propietario'=>['nombre'=>'Roberto Castillo','ciudad'=>'Ciudad','direccion'=>'Mar 33']
+        ],
+    ];
+}
+
+/**
+ * Busca por matricula (case-insensitive) en el registro y devuelve el registro o null
+ */
+function buscar_por_matricula($registro, $matricula) {
+    $matricula = strtoupper(trim($matricula));
+    return $registro[$matricula] ?? null;
+}
