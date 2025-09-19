@@ -68,3 +68,14 @@ function primer_multiplo_do_while($divisor, $min = 1, $max = 10000, $maxAttempts
     return ['numero' => null, 'iteraciones' => $count];
 }
 
+/**
+ * Ejercicio 4
+ * Crea arreglo con índices 97..122 y valores 'a'..'z'
+ */
+function crear_arreglo_ascii() {
+    $arr = [];
+    for ($i = 97; $i <= 122; $i++) {
+        $arr[$i] = chr($i);
+    }
+    return $arr;
+}

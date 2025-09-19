@@ -81,3 +81,15 @@ function h($s){ return htmlspecialchars($s, ENT_QUOTES|ENT_SUBSTITUTE, 'UTF-8');
       }
     ?>
   </fieldset>
+
+    <!-- EJERCICIO 4 -->
+  <fieldset><legend>Ejercicio 4 — arreglo ASCII 97..122</legend>
+    <?php
+      $arr = crear_arreglo_ascii();
+      echo '<table><thead><tr><th>Código</th><th>Letra</th></tr></thead><tbody>';
+      foreach ($arr as $k => $v) {
+        echo '<tr><td>'.h($k).'</td><td>'.h($v).'</td></tr>';
+      }
+      echo '</tbody></table>';
+    ?>
+  </fieldset>
