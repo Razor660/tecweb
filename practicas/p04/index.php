@@ -149,5 +149,11 @@
                  . 'Sistema operativo servidor: ' . htmlspecialchars(PHP_OS, ENT_QUOTES, 'UTF-8') . '<br />'
                  . 'Idioma navegador: ' . htmlspecialchars($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', ENT_QUOTES, 'UTF-8') . '<br /></p>';
     ?>
+    <p>
+        <a href="https://validator.w3.org/check?uri=referer"><img
+        src="https://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" height="31" width="88" /></a>
+    </p>
+    
+
 </body>
 </html>
