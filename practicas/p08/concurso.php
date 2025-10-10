@@ -20,30 +20,45 @@
 
 		<p>Gracias por entrar al concurso de Tenis Mike&#174; "Chidos mis Tenis". Hemos recibido la siguiente información de tu registro:</p>
 
+		<?php
+		// Función de escape para salida segura
+		function h($s){ return htmlspecialchars($s ?? '', ENT_QUOTES, 'UTF-8'); }
+
+		// Leer y normalizar datos recibidos por POST (usar ?? requiere PHP 7+)
+		$name  = $_POST['name']  ?? '';
+		$email = $_POST['email'] ?? '';
+		$phone = $_POST['phone'] ?? '';
+		$story = $_POST['story'] ?? '';
+		$color = $_POST['color'] ?? '';
+		$features = $_POST['features'] ?? []; // puede no existir => array vacío
+		$size  = $_POST['size'] ?? '';
+		?>
+
 		<h2>Acerca de ti:</h2>
-		<ul>
-			<li><strong>Nombre:</strong> <em><?php echo $_POST['name']; ?></em></li>
-			<li><strong>E-mail:</strong> <em><?php echo $_POST['email']; ?></em></li>
-			<li><strong>Télefono:</strong> <em><?php echo $_POST['phone']; ?></em></li>
-		</ul>
-		<p><strong>Tu triste historia:</strong> <em><?php echo $_POST['story']; ?></em></p>
+		<dl>
+		  <dt>Nombre:</dt><dd><?php echo h($name); ?></dd>
+		  <dt>E-mail:</dt><dd><?php echo h($email); ?></dd>
+		  <dt>Teléfono:</dt><dd><?php echo h($phone); ?></dd>
+		  <dt>Tu triste historia:</dt><dd><?php echo nl2br(h($story)); ?></dd>
+		</dl>
 
-		<h2>Tu diseño de Tenis (si ganas)</h2>
-		<ul>
-			<li><strong>Color:</strong> <em><?php echo $_POST['color']; ?></em></li>
-			<?php
-				$variable =  $_POST['features'];
-
-				if( !empty($variable) )
-				{
-					foreach ($variable as $key => $value) 
-					{
-						echo '<li><strong>Característica '.($key+1).':</strong> <em>'.$value.'</em></li>';
-					}
-				}
-			?>
-			<li><strong>Talla:</strong> <em><?php echo $_POST['size']; ?></em></li>
-		</ul>
+		<h3>Tu diseño de Tenis (si ganas)</h3>
+		<dl>
+		  <dt>Color:</dt><dd><?php echo h($color); ?></dd>
+		  <dt>Características:</dt>
+		  <dd>
+		    <?php
+		      if (is_array($features) && count($features) > 0) {
+		        echo '<ul>';
+		        foreach ($features as $f) echo '<li>'.h($f).'</li>';
+		        echo '</ul>';
+		      } else {
+		        echo 'Ninguna';
+		      }
+		    ?>
+		  </dd>
+		  <dt>Talla:</dt><dd><?php echo h($size); ?></dd>
+		</dl>
 		<p>
 		    <a href="http://validator.w3.org/check?uri=referer"><img
 		      src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
