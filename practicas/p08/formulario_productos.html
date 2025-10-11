@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Alta de producto</title></head>
+<body>
+  <h1>Registrar Producto</h1>
+  <form action="set_producto_v2.php" method="post">
+    <p>Nombre: <input type="text" name="nombre" maxlength="100" required></p>
+    <p>Marca: <input type="text" name="marca" maxlength="25" required></p>
+    <p>Modelo: <input type="text" name="modelo" maxlength="25" required></p>
+    <p>Precio: <input type="number" step="0.01" name="precio" required></p>
+    <p>Detalles: <input type="text" name="detalles" maxlength="250"></p>
+    <p>Unidades: <input type="number" name="unidades" min="0" value="0"></p>
+    <p>Imagen (ruta relativa): <input type="text" name="imagen" placeholder="img/miimagen.png"></p> <!-- opcional, aún tengo dudas -->
+    <p><input type="submit" value="Registrar"></p>
+  </form>
+</body>
+</html>
