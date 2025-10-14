@@ -71,7 +71,7 @@ if ($r['cnt'] > 0) {
     <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Duplicado</title></head>
     <body>
       <h1>Producto duplicado</h1>
-      <p>Ya existe un producto con el mismo nombre, marca y modelo.</p>
+      <p>Ya existe un prod  ucto con el mismo nombre, marca y modelo.</p>
       <p><a href="formulario_productos.html">Volver</a></p>
     </body></html>
     <?php
