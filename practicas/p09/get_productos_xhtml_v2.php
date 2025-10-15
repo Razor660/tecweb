@@ -1,11 +1,14 @@
 <?php
+// get_productos_xhtml_v2.php
+// Versión corregida para ser compatible con XHTML 1.1
 
+// Configuración de conexión (sin cambios)
 $dbHost = '127.0.0.1';
 $dbName = 'marketzone';
 $dbUser = 'root';
 $dbPass = '@Nothing30';
 
-// Conectar con PDO y manejo de errores 
+// Conectar con PDO y manejo de errores (sin cambios)
 try {
     $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
     $pdo = new PDO($dsn, $dbUser, $dbPass, [
@@ -19,7 +22,7 @@ try {
     exit;
 }
 
-// Obtener y validar parámetro tope 
+// Obtener y validar parámetro tope (sin cambios)
 $tope = isset($_GET['tope']) ? filter_var($_GET['tope'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) : false;
 if ($tope === false && isset($_GET['tope'])) {
     header('Content-Type: text/plain; charset=utf-8', true, 400);
@@ -27,7 +30,7 @@ if ($tope === false && isset($_GET['tope'])) {
     exit;
 }
 
-// Cabeceras XHTML 
+// Cabeceras XHTML (sin cambios)
 header('Content-Type: application/xhtml+xml; charset=utf-8');
 echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 ?>
@@ -37,7 +40,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Productos Modificables (unidades ≤ <?php echo $tope !== false ? htmlspecialchars($tope) : '—'; ?>)</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <style type="text/css">
     body { font-family: Arial, Helvetica, sans-serif; padding: 1rem; }
     .producto { border:1px solid #ccc; padding: .6rem; margin-bottom: .6rem; }
@@ -61,7 +64,8 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
                 <th>Precio</th>
                 <th>Unidades</th>
                 <th>Imagen</th>
-                <th>Modificar</th> </tr>
+                <th>Modificar</th>
+            </tr>
         </thead>
         <tbody>
             <?php
@@ -80,20 +84,21 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
                     echo '<td>' . htmlspecialchars($p['modelo']) . '</td>';
                     echo '<td>$' . htmlspecialchars($p['precio']) . '</td>';
                     echo '<td>' . htmlspecialchars($p['unidades']) . '</td>';
-                    echo '<td><img src="' . htmlspecialchars($p['imagen'] ?? '') . '" width="50" alt="Imagen de ' . htmlspecialchars($p['nombre']) . '"></td>';
+                    // CORREGIDO: Se autocierra la etiqueta <img>
+                    echo '<td><img src="' . htmlspecialchars($p['imagen'] ?? '') . '" width="50" alt="Imagen de ' . htmlspecialchars($p['nombre']) . '" /></td>';
                     
-                    // CAMBIO: Formulario con botón para enviar datos a la página de edición
                     echo '<td>';
                     echo '<form action="formulario_productos_v2.php" method="POST">';
-                    echo '<input type="hidden" name="id" value="' . htmlspecialchars($p['id']) . '">';
-                    echo '<input type="hidden" name="nombre" value="' . htmlspecialchars($p['nombre']) . '">';
-                    echo '<input type="hidden" name="marca" value="' . htmlspecialchars($p['marca']) . '">';
-                    echo '<input type="hidden" name="modelo" value="' . htmlspecialchars($p['modelo']) . '">';
-                    echo '<input type="hidden" name="precio" value="' . htmlspecialchars($p['precio']) . '">';
-                    echo '<input type="hidden" name="detalles" value="' . htmlspecialchars($p['detalles'] ?? '') . '">';
-                    echo '<input type="hidden" name="unidades" value="' . htmlspecialchars($p['unidades']) . '">';
-                    echo '<input type="hidden" name="imagen" value="' . htmlspecialchars($p['imagen'] ?? '') . '">';
-                    echo '<input type="submit" value="Modificar" class="btn btn-warning btn-sm">';
+                    // CORREGIDO: Se autocierran las etiquetas <input>
+                    echo '<input type="hidden" name="id" value="' . htmlspecialchars($p['id']) . '" />';
+                    echo '<input type="hidden" name="nombre" value="' . htmlspecialchars($p['nombre']) . '" />';
+                    echo '<input type="hidden" name="marca" value="' . htmlspecialchars($p['marca']) . '" />';
+                    echo '<input type="hidden" name="modelo" value="' . htmlspecialchars($p['modelo']) . '" />';
+                    echo '<input type="hidden" name="precio" value="' . htmlspecialchars($p['precio']) . '" />';
+                    echo '<input type="hidden" name="detalles" value="' . htmlspecialchars($p['detalles'] ?? '') . '" />';
+                    echo '<input type="hidden" name="unidades" value="' . htmlspecialchars($p['unidades']) . '" />';
+                    echo '<input type="hidden" name="imagen" value="' . htmlspecialchars($p['imagen'] ?? '') . '" />';
+                    echo '<input type="submit" value="Modificar" class="btn btn-warning btn-sm" />';
                     echo '</form>';
                     echo '</td>';
                     
