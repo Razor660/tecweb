@@ -61,7 +61,7 @@ try {
                 echo '<td><img src="' . htmlspecialchars($p['imagen'] ?? '') . '" width="50" alt="Imagen de producto" /></td>';
                 
                 echo '<td>';
-                echo '<form action="formulario_productos_v2.php" method="POST">';
+                echo '<form action="formulario_productos_v3.php" method="POST">';
                  // CORREGIDO: Se autocierran las etiquetas <input>
                 echo '<input type="hidden" name="id" value="' . htmlspecialchars($p['id']) . '" />';
                 echo '<input type="hidden" name="nombre" value="' . htmlspecialchars($p['nombre']) . '" />';
@@ -81,4 +81,4 @@ try {
     </tbody>
   </table>
 </body>
-</html>
+</html>     
