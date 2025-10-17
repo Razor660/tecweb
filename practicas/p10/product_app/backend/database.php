@@ -1,15 +1,16 @@
 <?php
-    $conexion = @mysqli_connect(
-        'localhost',
-        'root',
-        '@Nothing30',
-        'marketzone'
-    );
 
-    /**
-     * NOTA: si la conexión falló $conexion contendrá false
-     **/
-    if(!$conexion) {
-        die('¡Base de datos NO conextada!');
-    }
+
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '@Nothing30'); 
+define('DB_NAME', 'marketzone');
+
+
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+
+if (!$conn) {
+    die("Error de conexión: " . mysqli_connect_error());
+}
+
 ?>
