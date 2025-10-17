@@ -1,36 +1,62 @@
 <?php
-    include_once __DIR__.'/database.php';
 
-    // El arreglo que se devolverá en formato JSON
-    $products = array();
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', 'Isra2818');
+define('DB_NAME', 'marketzone');
 
-    // Se verifica haber recibido el parámetro de búsqueda
-    if (isset($_POST['search'])) {
-        $search = $_POST['search'];
+$conexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-        // Se previene inyección SQL escapando el término de búsqueda
-        $search = $conexion->real_escape_string($search);
+if (!$conexion) {
+    // Registra el error en un archivo de log.
+    die(json_encode(['error' => 'Error de conexión a la base de datos.']));
+}
 
-        // La consulta de búsqueda versátil usando LIKE
-        // Busca coincidencias en nombre, marca o detalles
-        $query = "SELECT * FROM productos WHERE nombre LIKE '%{$search}%' OR marca LIKE '%{$search}%' OR detalles LIKE '%{$search}%'";
+$data = array();
 
-        if ($result = $conexion->query($query)) {
-            // Se itera sobre los resultados y se añaden al arreglo de productos
-            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
-                $product = array(); // Arreglo para el producto actual
-                foreach ($row as $key => $value) {
-                    $product[$key] = $value;
-                }
-                $products[] = $product; // Se añade el producto al arreglo principal
-            }
-            $result->free();
-        } else {
-            die('Query Error: ' . mysqli_error($conexion));
+// 1. VERIFICAR HABER RECIBIDO UN DATO POR GET 
+if (isset($_GET['search'])) {
+    
+    // 2. PREPARAR LA CONSULTA PARA MÁXIMA SEGURIDAD
+    $sql = "SELECT * FROM productos 
+            WHERE eliminado = 0 AND (
+                nombre LIKE ? 
+                OR marca LIKE ? 
+                OR detalles LIKE ?
+            )";
+    
+    $stmt = $conexion->prepare($sql);
+
+    if ($stmt) {
+        // 3. VINCULAR LOS PARÁMETROS
+        $searchTerm = "%" . $_GET['search'] . "%";
+        
+        // sss -> string, string, string
+        $stmt->bind_param('sss', $searchTerm, $searchTerm, $searchTerm);
+        
+        // 4. EJECUTAR LA CONSULTA
+        $stmt->execute();
+        
+        $result = $stmt->get_result();
+        
+        // Recorrer los resultados y guardarlos en el array
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
         }
-        $conexion->close();
+        
+        // Cerrar la sentencia
+        $stmt->close();
+    } else {
+        // Manejo de error
+        die(json_encode(['error' => 'Error en la preparación de la consulta.']));
     }
+}
 
-    // Se convierte el arreglo de productos a JSON para enviarlo al frontend
-    echo json_encode($products, JSON_PRETTY_PRINT);
+// Cerrar la conexión
+$conexion->close();
+
+// Devolver el resultado como JSON. Si no hay resultados [] se devolverá.
+header('Content-Type: application/json');
+echo json_encode($data, JSON_PRETTY_PRINT);
+
 ?>
