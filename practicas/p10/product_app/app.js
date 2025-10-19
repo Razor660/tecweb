@@ -127,11 +127,93 @@ function agregarProducto(e) {
 
     // SE OBTIENE DESDE EL FORMULARIO EL JSON A ENVIAR
     var productoJsonString = document.getElementById('description').value;
+    
     // SE CONVIERTE EL JSON DE STRING A OBJETO
-    var finalJSON = JSON.parse(productoJsonString);
+    var finalJSON;
+    try {
+        finalJSON = JSON.parse(productoJsonString);
+    } catch (error) {
+        alert("Error: El formato del JSON en 'descripción' no es válido.");
+        return;
+    }
+
     // SE AGREGA AL JSON EL NOMBRE DEL PRODUCTO
     finalJSON['nombre'] = document.getElementById('name').value;
-    // SE OBTIENE EL STRING DEL JSON FINAL
+
+    // --- INICIO DE VALIDACIONES (a-g) ---
+
+    // a. Nombre: requerido y <= 100 caracteres
+    if (!finalJSON.nombre || finalJSON.nombre.trim() === "") {
+        alert("Error (a): El nombre es requerido.");
+        return;
+    }
+    if (finalJSON.nombre.length > 100) {
+        alert("Error (a): El nombre no debe exceder los 100 caracteres.");
+        return;
+    }
+
+    // b. Marca: requerida y de una lista
+    // (Como no hay lista en HTML, definimos una aquí para validar)
+    var marcasValidas = ['HP', 'Lenovo', 'Dell', 'Apple', 'Samsung', 'LG', 'Xiaomi', 'Motorola', 'ASUS', 'Acer', 'NA'];
+    if (!finalJSON.marca || !marcasValidas.includes(finalJSON.marca)) {
+        alert("Error (b): La marca es requerida y debe ser una marca válida (Ej: " + marcasValidas.join(', ') + ")");
+        return;
+    }
+
+    // c. Modelo: requerido, texto alfanumérico y <= 25 caracteres
+    if (!finalJSON.modelo || finalJSON.modelo.trim() === "") {
+        alert("Error (c): El modelo es requerido.");
+        return;
+    }
+    if (finalJSON.modelo.length > 25) {
+        alert("Error (c): El modelo no debe exceder los 25 caracteres.");
+        return;
+    }
+    // Opcional: Validación estricta de alfanumérico (letras, números, guiones)
+    // var modeloRegex = /^[a-zA-Z0-9-]+$/; 
+    // if (!modeloRegex.test(finalJSON.modelo)) {
+    //     alert("Error (c): El modelo debe ser alfanumérico (solo letras, números y guiones).");
+    //     return;
+    // }
+
+
+    // d. Precio: requerido y > 99.99
+    if (finalJSON.precio === undefined || finalJSON.precio === null) {
+         alert("Error (d): El precio es requerido.");
+         return;
+    }
+    var precioNum = parseFloat(finalJSON.precio);
+    if (isNaN(precioNum) || precioNum <= 99.99) {
+        alert("Error (d): El precio debe ser un número mayor a 99.99");
+        return;
+    }
+
+    // e. Detalles: opcional, <= 250 caracteres
+    if (finalJSON.detalles && finalJSON.detalles.length > 250) {
+        alert("Error (e): Los detalles no deben exceder los 250 caracteres.");
+        return;
+    }
+
+    // f. Unidades: requeridas y >= 0
+    if (finalJSON.unidades === undefined || finalJSON.unidades === null) {
+        alert("Error (f): Las unidades son requeridas.");
+        return;
+    }
+    var unidadesNum = parseInt(finalJSON.unidades);
+    if (isNaN(unidadesNum) || !Number.isInteger(unidadesNum) || unidadesNum < 0) {
+        alert("Error (f): Las unidades deben ser un número entero mayor o igual a 0.");
+        return;
+    }
+
+    // g. Imagen: opcional, si no, poner default
+    if (!finalJSON.imagen || finalJSON.imagen.trim() === "") {
+        finalJSON.imagen = "img/default.png";
+    }
+    
+    // --- FIN DE VALIDACIONES ---
+
+
+    // SE OBTIENE EL STRING DEL JSON FINAL VALIDADO
     productoJsonString = JSON.stringify(finalJSON,null,2);
 
     // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
@@ -141,7 +223,15 @@ function agregarProducto(e) {
     client.onreadystatechange = function () {
         // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
         if (client.readyState == 4 && client.status == 200) {
-            console.log(client.responseText);
+            
+            // Mostrar la respuesta del servidor (éxito o error)
+            window.alert(client.responseText); 
+            
+            // Opcional: Limpiar formulario si fue exitoso
+            if(client.responseText.includes("Éxito")) {
+                document.getElementById('name').value = '';
+                init(); // Reinicia el JSON de descripción
+            }
         }
     };
     client.send(productoJsonString);
