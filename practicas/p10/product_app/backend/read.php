@@ -2,20 +2,31 @@
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
-    $data = array();
-    // SE VERIFICA HABER RECIBIDO EL ID
-    if( isset($_POST['id']) ) {
-        $id = $_POST['id'];
-        // SE REALIZA LA QUERY DE BÚSQUEDA Y AL MISMO TIEMPO SE VALIDA SI HUBO RESULTADOS
-        if ( $result = $conexion->query("SELECT * FROM productos WHERE id = '{$id}'") ) {
-            // SE OBTIENEN LOS RESULTADOS
-			$row = $result->fetch_array(MYSQLI_ASSOC);
+    $data = array(); // Este será nuestro array de productos
 
-            if(!is_null($row)) {
-                // SE CODIFICAN A UTF-8 LOS DATOS Y SE MAPEAN AL ARREGLO DE RESPUESTA
+    // SE VERIFICA HABER RECIBIDO EL TÉRMINO DE BÚSQUEDA
+    // Usamos 'id' porque es el parámetro que envía el frontend (app.js)
+    if( isset($_POST['id']) ) {
+        $search_term = $_POST['id'];
+
+        // SE REALIZA LA QUERY DE BÚSQUEDA CON LIKE
+        $sql = "SELECT * FROM productos WHERE 
+                    nombre LIKE '%{$search_term}%' OR 
+                    marca LIKE '%{$search_term}%' OR 
+                    detalles LIKE '%{$search_term}%'";
+        
+        if ( $result = $conexion->query($sql) ) {
+            
+            // SE OBTIENEN LOS RESULTADOS FILA POR FILA
+			while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+                
+                // Se mapean los datos de cada fila
+                $product_data = array();
                 foreach($row as $key => $value) {
-                    $data[$key] = $value; // utf8_encode($value);
+                    $product_data[$key] = $value; // utf8_encode($value);
                 }
+                // Se agrega la fila al array de respuesta
+                $data[] = $product_data;
             }
 			$result->free();
 		} else {

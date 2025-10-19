@@ -60,6 +60,67 @@ function buscarID(e) {
     client.send("id="+id);
 }
 
+// NUEVA FUNCIÓN CALLBACK DE BOTÓN "Buscar"
+function buscarProducto(e) {
+    /**
+     * Prevenimos el comportamiento default del formulario
+     */
+    e.preventDefault();
+
+    // SE OBTIENE EL TÉRMINO A BUSCAR
+    var searchTerm = document.getElementById('search').value;
+
+    // SE CREA EL OBJETO DE CONEXIÓN ASÍNCRONA AL SERVIDOR
+    var client = getXMLHttpRequest();
+    client.open('POST', './backend/read.php', true);
+    client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    client.onreadystatechange = function () {
+        // SE VERIFICA SI LA RESPUESTA ESTÁ LISTA Y FUE SATISFACTORIA
+        if (client.readyState == 4 && client.status == 200) {
+            console.log('[CLIENTE]\n'+client.responseText);
+            
+            // SE OBTIENE EL ARRAY DE PRODUCTOS A PARTIR DE UN STRING JSON
+            let productos = JSON.parse(client.responseText);
+            
+            // SE VERIFICA SI EL ARRAY JSON TIENE DATOS
+            if(productos.length > 0) {
+                
+                // SE INICIALIZA LA PLANTILLA
+                let template = '';
+                
+                // SE RECORRE EL ARRAY DE PRODUCTOS
+                productos.forEach(producto => {
+                    // SE CREA UNA LISTA HTML CON LA DESCRIPCIÓN DE CADA PRODUCTO
+                    let descripcion = '';
+                        descripcion += '<li>precio: '+producto.precio+'</li>';
+                        descripcion += '<li>unidades: '+producto.unidades+'</li>';
+                        descripcion += '<li>modelo: '+producto.modelo+'</li>';
+                        descripcion += '<li>marca: '+producto.marca+'</li>';
+                        descripcion += '<li>detalles: '+producto.detalles+'</li>';
+                    
+                    // SE AGREGA LA FILA A LA PLANTILLA
+                    template += `
+                        <tr>
+                            <td>${producto.id}</td>
+                            <td>${producto.nombre}</td>
+                            <td><ul>${descripcion}</ul></td>
+                        </tr>
+                    `;
+                }); // Fin de forEach
+
+                // SE INSERTA LA PLANTILLA EN EL ELEMENTO CON ID "productos"
+                document.getElementById("productos").innerHTML = template;
+            } else {
+                // Si no hay resultados, limpiar la tabla y mostrar mensaje
+                document.getElementById("productos").innerHTML = '<tr><td colspan="3">No se encontraron productos.</td></tr>';
+            }
+        }
+    };
+    // SE ENVÍA EL TÉRMINO DE BÚSQUEDA. 
+    // El backend (read.php) lo espera como 'id'
+    client.send("id=" + searchTerm);
+}
+
 // FUNCIÓN CALLBACK DE BOTÓN "Agregar Producto"
 function agregarProducto(e) {
     e.preventDefault();
