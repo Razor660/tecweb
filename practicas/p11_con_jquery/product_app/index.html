@@ -15,7 +15,7 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto"></ul>
-          <form class="my-2 my-lg-0">
+          <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" name="search" id="search" type="search" placeholder="ID, marca o descripción" aria-label="Search">
             <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
           </form>
@@ -28,16 +28,15 @@
           <div class="card">
             <div class="card-body">
               <form id="product-form">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto">
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
+                </div>
                 <input type="hidden" id="productId">
-                <div class="form-group">
-                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto" required>
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" id="description" cols="30" rows="10" placeholder="JSON de producto" required></textarea>
-                </div>
-                
                 <button class="btn btn-primary btn-block text-center" type="submit">
-                  Guardar Producto
+                  Agregar Producto
                 </button>
               </form>
             </div>
@@ -57,7 +56,6 @@
                 <td>Id</td>
                 <td>Nombre</td>
                 <td>Descripción</td>
-                <td>Acción</td>
               </tr>
             </thead>
             <tbody id="products"></tbody>
