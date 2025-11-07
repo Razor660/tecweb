@@ -190,6 +190,10 @@ $(document).ready(function(){
             
             // SE PONE LA BANDERA DE EDICIÓN EN true
             edit = true;
+
+            // ===== PASO 2 =====
+            $('button.btn-primary').text("Modificar Producto");
+            // ===== PASO 2 =====
         });
         e.preventDefault();
     });    
