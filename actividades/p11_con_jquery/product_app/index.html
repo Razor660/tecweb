@@ -32,19 +32,32 @@
               <!-- FORMULARIO PARA AGREGAR PRODUCTO -->
               <form id="product-form">
                 <div class="form-group">
-                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto">
+                  <input class="form-control" type="text" id="name" placeholder="Nombre de producto" required>
+                </div>
+                
+                <div class="form-group">
+                  <input class="form-control" type="text" id="marca" placeholder="Marca" required>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" id="description" cols="30" rows="10" placeholder="JSON de producto"></textarea>
+                  <input class="form-control" type="text" id="modelo" placeholder="Modelo" required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="number" id="precio" step="0.01" min="0" placeholder="Precio" required>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="number" id="unidades" min="0" placeholder="Unidades" required>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" id="detalles" rows="3" placeholder="Detalles" required></textarea>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" id="imagen" placeholder="URL de Imagen (ej. img/default.png)" required>
                 </div>
                 <input type="hidden" id="productId">
                 <button class="btn btn-primary btn-block text-center" type="submit">
                   Agregar Producto
                 </button>
               </form>
-            </div>
-          </div>
-        </div>
 
         <!-- TABLA  -->
         <div class="col-md-7">
