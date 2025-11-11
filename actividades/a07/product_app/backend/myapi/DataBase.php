@@ -4,12 +4,13 @@
     //Clase abstracta DataBase
     //No puede ser instanciada directamente.
      
-    abstract class DataBase {
+abstract class DataBase {
         
-        //La conexión a la base de datos.
-         @var \mysqli $conexion 
-         //Es protected para que las clases que heredan puedan usarla.
-         
+        /**
+         * La conexión a la base de datos.
+         * @var \mysqli $conexion 
+         * Es protected para que las clases que heredan puedan usarla.
+         */
         protected $conexion;
 
          //Constructor de la clase. inicializa la conexión a la base de datos, muestra un error si la conexión falla.

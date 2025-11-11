@@ -1,4 +1,5 @@
 <?php
+/*
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
@@ -26,4 +27,20 @@
 
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+*/
+
+// b. Namespace e inclusión
+    use myapi\Products;
+    require_once __DIR__.'/myapi/Products.php';
+
+    // c. Instancia de Products
+    $products = new Products();
+
+    // d. Se valida el parámetro y se usa el método single()
+    if( isset($_POST['id']) ) {
+        $products->single($_POST['id']);
+    }
+
+    // e. Se devuelve el JSON
+    echo $products->getData();
 ?>
