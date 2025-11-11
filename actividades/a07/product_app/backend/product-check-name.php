@@ -1,4 +1,5 @@
 <?php
+/*
     include_once __DIR__.'/database.php';
 
     $data = array(
@@ -34,4 +35,21 @@
 
     // Devolver siempre una respuesta JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+    /*/
+
+    // b. Namespace e inclusión
+    use myapi\Products;
+    require_once __DIR__.'/myapi/Products.php';
+
+    // Se instancia la clase
+    $products = new Products();
+
+    // Se llama al nuevo método checkName
+    $resultData = $products->checkName(
+        $_POST['nombre'], 
+        isset($_POST['id']) ? $_POST['id'] : null
+    );
+
+    // e. Se devuelven los datos (sin usar getData(), sino el resultado directo)
+    echo json_encode($resultData, JSON_PRETTY_PRINT);
 ?>

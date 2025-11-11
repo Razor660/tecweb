@@ -6,8 +6,9 @@
     //Clase Products extiende DataBase y maneja el CRUD 
     class Products extends DataBase {
         
-        @var array $data //Almacena la respuesta que será devuelta como JSON.
-         
+        /**
+         * @var array $data Almacena la respuesta que será devuelta como JSON.
+         */
         private $data;
 
         
@@ -178,5 +179,39 @@
         public function getData() {
             return json_encode($this->data, JSON_PRETTY_PRINT);
         }
-    }
+        // ... (justo después del método getData()) ...
+
+        /**
+         * Verifica si un nombre de producto ya existe, 
+         * opcionalmente excluyendo un ID (para edición).
+         * Devuelve un array con el estado, no lo guarda en $this->data.
+         */
+        public function checkName($name, $id = null) {
+            $name = $this->conexion->real_escape_string($name);
+            
+            $idClause = "";
+            if (!empty($id)) {
+                $id = $this->conexion->real_escape_string($id);
+                $idClause = " AND id != {$id}";
+            }
+
+            $sql = "SELECT * FROM productos WHERE nombre = '{$name}' AND eliminado = 0{$idClause}";
+            $result = $this->conexion->query($sql);
+
+            $data = array();
+            if ($result && $result->num_rows > 0) {
+                $data['exists'] = true;
+                $data['message'] = 'Ese nombre de producto ya existe';
+            } else {
+                $data['exists'] = false;
+                $data['message'] = 'Nombre disponible';
+            }
+            
+            if ($result) {
+                $result->free();
+            }
+            
+            return $data; // Devuelve el array directamente
+        }
+    } 
 ?>
