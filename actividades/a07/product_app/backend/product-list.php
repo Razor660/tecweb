@@ -1,4 +1,6 @@
 <?php
+/*
+    // a. TODO EL CÓDIGO ORIGINAL COMENTADO
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
@@ -25,4 +27,20 @@
     
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+    */
+
+
+    // b. Se usa el namespace y se incluye la clase
+    use myapi\Products;
+    require_once __DIR__.'/myapi/Products.php';
+
+    // c. Se crea una instancia de la clase Products
+    // (Usamos el constructor opcional que preferiste)
+    $products = new Products();
+
+    // d. Se usa el método list()
+    $products->list();
+
+    // e. Se usa getData() para devolver el JSON
+    echo $products->getData();
 ?>
