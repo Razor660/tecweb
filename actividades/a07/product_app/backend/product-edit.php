@@ -1,4 +1,5 @@
 <?php
+/*
     include_once __DIR__.'/database.php';
 
     // SE CREA EL ARREGLO QUE SE VA A DEVOLVER EN FORMA DE JSON
@@ -25,4 +26,22 @@
     
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+*/
+
+// b. Namespace e inclusión
+    use myapi\Products;
+    require_once __DIR__.'/myapi/Products.php';
+
+    // c. Instancia de Products
+    $products = new Products();
+
+    // d. Se valida, se convierte a objeto y se usa el método edit()
+    if( isset($_POST['id']) ) {
+        // La clase espera un objeto
+        $jsonOBJ = json_decode( json_encode($_POST) );
+        $products->edit($jsonOBJ);
+    }
+
+    // e. Se devuelve el JSON
+    echo $products->getData();
 ?>

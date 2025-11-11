@@ -1,4 +1,6 @@
 <?php
+    /*
+    // a. TODO EL CÓDIGO ORIGINAL COMENTADO
     include_once __DIR__.'/database.php';
 
     // SE OBTIENE LA INFORMACIÓN DEL PRODUCTO ENVIADA POR EL CLIENTE
@@ -31,4 +33,22 @@
 
     // SE HACE LA CONVERSIÓN DE ARRAY A JSON
     echo json_encode($data, JSON_PRETTY_PRINT);
+    */
+
+    // b. Namespace e inclusión
+    use myapi\Products;
+    require_once __DIR__.'/myapi/Products.php';
+
+    // c. Instancia de Products
+    $products = new Products();
+
+    // d. Se valida, se convierte a objeto y se usa el método add()
+    if(isset($_POST['nombre'])) {
+        // La clase espera un objeto, no un array asociativo
+        $jsonOBJ = json_decode( json_encode($_POST) );
+        $products->add($jsonOBJ);
+    }
+
+    // e. Se devuelve el JSON
+    echo $products->getData();
 ?>
