@@ -1,4 +1,5 @@
 <?php
+/*
 namespace TECWEB\MYAPI;
 
 use TECWEB\MYAPI\DataBase;
@@ -157,4 +158,5 @@ class Products extends DataBase {
 }
 
 //$productos = new Productos();
+*/
 ?>
